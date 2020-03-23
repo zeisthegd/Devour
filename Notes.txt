@@ -1,0 +1,18 @@
+﻿kill mobs -> get material -> make power -> to transform 
+-> more powerful -> kill more mobs ->......
+
+
+interact with the environment using mob's power
+
+23/3/2020 objective: set up patroll class for mobs
+- Not Done
+23/3/2020 objective: make kisi and wiz attack
+- Not Done
+
+
+
+31/3/2020 : complete core machenic : grab mob -> change form, attack type ; 
+
+
+April: 
++ interaction with environment
