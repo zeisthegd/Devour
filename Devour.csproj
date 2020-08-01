@@ -55,22 +55,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Mobs\AISystem\PatrolSystem.cs" />
+    <Compile Include="Scripts\Mobs\AttackTypes\Attacks.cs" />
+    <Compile Include="Scripts\Mobs\AttackTypes\Minions\Gore.cs" />
+    <Compile Include="Scripts\Mobs\Kisi\Kisi.cs" />
     <Compile Include="Scripts\Mobs\Mob.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Attack.cs" />
+    <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Chase.cs" />
+    <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Hooked.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Patrol.cs" />
-    <Compile Include="Scripts\Mobs\StateMachine\MobState.cs" />
+    <Compile Include="Scripts\Mobs\StateMachine\IMobState.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\StateMachine.cs" />
     <Compile Include="Scripts\UI\Cursor\Cursor.cs" />
     <Compile Include="Scripts\Utility\Animation\AnimationControl.cs" />
+    <Compile Include="Scripts\Utility\Calculations.cs" />
+    <Compile Include="Scripts\Utility\Camera\Camera.cs" />
+    <Compile Include="Scripts\Utility\FormManager.cs" />
+    <Compile Include="Scripts\Utility\GroupCheck.cs" />
+    <Compile Include="Scripts\Wiz\AttackType\FormAttacksStrategy.cs" />
+    <Compile Include="Scripts\Wiz\AttackType\KwissiAtt.cs" />
+    <Compile Include="Scripts\Wiz\AttackType\NormalAtt.cs" />
+    <Compile Include="Scripts\Wiz\Hook\Hook.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\Attack.cs" />
+    <Compile Include="Scripts\Wiz\StateMachine\Hooking.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\Idle.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\Run.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\StateMachine.cs" />
-    <Compile Include="Scripts\Wiz\StateMachine\WizState.cs" />
+    <Compile Include="Scripts\Wiz\StateMachine\IWizState.cs" />
+    <Compile Include="Scripts\Wiz\StateMachine\Transforming.cs" />
+    <Compile Include="Scripts\Wiz\Transform\Icon\TransformMobIcon.cs" />
+    <Compile Include="Scripts\Wiz\Transform\Kwissi.cs" />
+    <Compile Include="Scripts\Wiz\Transform\NormalWiz.cs" />
+    <Compile Include="Scripts\Wiz\Transform\WizForms.cs" />
     <Compile Include="Scripts\Wiz\Wiz.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Notes.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,3 +3,4 @@ C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Tools\Devour.dll
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Tools\Devour.pdb
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Tools\Devour.dll
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Tools\Devour.pdb
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Tools\Devour.csproj.CoreCompileInputs.cache

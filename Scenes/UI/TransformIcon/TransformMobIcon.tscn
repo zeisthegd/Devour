@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Art/UI/Copied Monsters/Transformation Frame.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Wiz/Transform/Icon/TransformMobIcon.cs" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "haveInfo"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("frame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("icon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "noInfo"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("frame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("icon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="TransformMobIcon" type="Node2D"]
+position = Vector2( 0, 6.38871 )
+script = ExtResource( 2 )
+
+[node name="animationPlayer" type="AnimationPlayer" parent="."]
+anims/haveInfo = SubResource( 1 )
+anims/noInfo = SubResource( 2 )
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 0, -32 )
+z_index = -1
+
+[node name="frame" type="Sprite" parent="."]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )

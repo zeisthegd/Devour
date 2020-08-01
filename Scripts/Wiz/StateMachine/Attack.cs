@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WizStateMachine
 {
-	class Attack : WizState
+	class Attack : IWizState
 	{
 		StateMachine stateMachine;
 
@@ -45,7 +45,13 @@ namespace WizStateMachine
 
 		public void PressAttack(Wiz wiz)
 		{
-			stateMachine.SetWizState(stateMachine.GetAttackState());
+			wiz.FormAlgorithm.DoAttack();
+
+			//stateMachine.SetWizState(stateMachine.GetAttackState());
+		}
+		public void PressSpecial(Wiz wiz)
+		{
+
 		}
 		public void PlayAnimation(Wiz wiz)
 		{

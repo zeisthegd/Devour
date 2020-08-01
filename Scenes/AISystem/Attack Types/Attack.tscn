@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Mobs/AttackTypes/Attacks.cs" type="Script" id=1]
+
+[node name="Attack" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="attackLength" type="Timer" parent="."]
+one_shot = true
+
+[node name="attackCooldownTime" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="attackLength" to="." method="_on_attackLength_timeout"]
+[connection signal="timeout" from="attackCooldownTime" to="." method="_on_attackCooldownTime_timeout"]

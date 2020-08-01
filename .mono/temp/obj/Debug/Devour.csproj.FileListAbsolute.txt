@@ -1,0 +1,5 @@
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Debug\Devour.csprojAssemblyReference.cache
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Debug\Devour.dll
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Debug\Devour.pdb
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Debug\Devour.dll
+C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Debug\Devour.pdb

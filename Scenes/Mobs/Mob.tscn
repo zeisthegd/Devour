@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Art/Enemy/Kisi/Chargee Small.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Mobs/Mob.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/AISystem/PatrolSystem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Art/Enemy/Kisi/icon.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 8.0
 
-[node name="Mob" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 100 )
+
+[node name="Mob" type="Area2D"]
+script = ExtResource( 2 )
 
 [node name="hitBox" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="spriteSheet" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 hframes = 4
 
 [node name="animationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="attackDuration" type="Timer" parent="."]
+[node name="attackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackRange"]
+shape = SubResource( 2 )
+
+[node name="PatrolSystem" parent="." instance=ExtResource( 3 )]
+
+[node name="icon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+[connection signal="area_entered" from="." to="." method="_on_Mob_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]
+[connection signal="body_entered" from="attackRange" to="." method="_on_attackRange_body_entered"]
+[connection signal="body_exited" from="attackRange" to="." method="_on_attackRange_body_exited"]

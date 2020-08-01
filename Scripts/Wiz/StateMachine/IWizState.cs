@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WizStateMachine
 {
-    interface WizState
+    public interface IWizState
     {
         void HandleInput(Wiz wiz);
 
@@ -17,5 +17,6 @@ namespace WizStateMachine
         void PressLeft(Wiz wiz);
         void PressRight(Wiz wiz);
         void PressAttack(Wiz wiz);
+        void PressSpecial(Wiz wiz);
     }
 }
