@@ -8,40 +8,29 @@ using WizHook;
 
 namespace WizStateMachine
 {
-	class Hooking : IWizState
+	class Hooking : WizState
 	{
-		StateMachine stateMachine;
 		[Export]
 		PackedScene hookScene = (PackedScene)GD.Load("res://Scenes/Wiz/Hook/Hook.tscn");
 
-		public Hooking(StateMachine newStateMachine)
+		public Hooking(StateMachine newStateMachine) : base(newStateMachine)
 		{
-
-			this.stateMachine = newStateMachine;
+		}
+		public override void HandleInput()
+		{
+			ShootTheHook();
+			NotHooking();
 		}
 
-
-
-		public void HandleInput(Wiz wiz)
-		{
-
-			ShootTheHook(wiz);
-			//revoke
-			ChangeToIdle(wiz);
-		}
-
-		private void ShootTheHook(Wiz wiz)
+		private void ShootTheHook()
 		{
 			if (wiz.Hook == null)
-			{
-				
+			{			
 				Vector2 localMousePosition = wiz.GetLocalMousePosition();
-				Vector2 hookDiretion = DirectionToMouse(wiz, wiz.GetGlobalMousePosition());
-				//spawn the hook
+				Vector2 hookDiretion = DirectionToMouse(wiz.GetGlobalMousePosition());
 				
 				Hook newHook = (Hook)hookScene.Instance();
 				newHook.SetDirectionAndRotation(hookDiretion, localMousePosition.Angle());
-				//newHook.Velocity = newHook.Direction.Normalized() * 475;
 
 				wiz.Velocity = Vector2.Zero;
 
@@ -50,51 +39,22 @@ namespace WizStateMachine
 			}
 		}
 
-		private void ChangeToIdle(Wiz wiz)
+		private void NotHooking()
 		{
 			if (stateMachine.IsHooking == false)
 			{
-				stateMachine.SetWizState(stateMachine.GetIdleState());
+				ChangeToIdle();
 			}
 		}
 
-		private Vector2 DirectionToMouse(Wiz wiz, Vector2 mousePosition)
+		private Vector2 DirectionToMouse( Vector2 mousePosition)
 		{
 			return (mousePosition - wiz.Position);
 		}
 
-		public void PlayAnimation(Wiz wiz)
+		public override void PlayAnimation()
 		{
 			throw new NotImplementedException();
-		}
-
-		public void PressAttack(Wiz wiz)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void PressDown(Wiz wiz)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void PressLeft(Wiz wiz)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void PressRight(Wiz wiz)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void PressUp(Wiz wiz)
-		{
-			throw new NotImplementedException();
-		}
-		public void PressSpecial(Wiz wiz)
-		{
-			
 		}
 	}
 }

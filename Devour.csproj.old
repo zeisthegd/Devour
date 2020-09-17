@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A6E25B71-1BD0-4769-8CB2-4C1F174A21E1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -12,11 +12,11 @@
     <GodotProjectGeneratorVersion>1.0.7333.3918</GodotProjectGeneratorVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)</IntermediateOutputPath>
-    <ApiConfiguration Condition=" '$(Configuration)' != 'ExportRelease' ">Debug</ApiConfiguration>
-    <ApiConfiguration Condition=" '$(Configuration)' == 'ExportRelease' ">Release</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' == 'Release' ">Release</ApiConfiguration>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportDebug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportRelease|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(GodotDefineConstants);GODOT;</DefineConstants>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Tools|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
@@ -47,7 +47,7 @@
       <Private>False</Private>
       <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharp.dll</HintPath>
     </Reference>
-    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Debug' ">
+    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' ">
       <Private>False</Private>
       <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
     </Reference>
@@ -63,9 +63,8 @@
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Attack.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Chase.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Hooked.cs" />
-    <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\MobState.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\Patrol.cs" />
-    <Compile Include="Scripts\Mobs\StateMachine\GeneralStates\IMobState.cs" />
+    <Compile Include="Scripts\Mobs\StateMachine\IMobState.cs" />
     <Compile Include="Scripts\Mobs\StateMachine\StateMachine.cs" />
     <Compile Include="Scripts\UI\Cursor\Cursor.cs" />
     <Compile Include="Scripts\Utility\Animation\AnimationControl.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="Scripts\Wiz\StateMachine\StateMachine.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\IWizState.cs" />
     <Compile Include="Scripts\Wiz\StateMachine\Transforming.cs" />
-    <Compile Include="Scripts\Wiz\StateMachine\WizState.cs" />
     <Compile Include="Scripts\Wiz\Transform\Icon\TransformMobIcon.cs" />
     <Compile Include="Scripts\Wiz\Transform\Kwissi.cs" />
     <Compile Include="Scripts\Wiz\Transform\NormalWiz.cs" />
@@ -95,11 +93,5 @@
     <Content Include="Notes.txt" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies">
-      <Version>1.0.0</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

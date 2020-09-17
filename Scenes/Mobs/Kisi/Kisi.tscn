@@ -156,3 +156,5 @@ anims/patrolRight = SubResource( 7 )
 anims/patrolUp = SubResource( 8 )
 
 [node name="Gore" parent="." index="5" instance=ExtResource( 4 )]
+
+[node name="Navigation2D" type="Navigation2D" parent="." index="7"]

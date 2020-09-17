@@ -16,13 +16,12 @@ namespace Devour
 
 		private void _on_attackDuation_timeout()
 		{
-			// Replace with function body.
+			
 		}
-
 
 		private void _on_attackCooldowntime_timeout()
 		{
-			// Replace with function body.
+			
 		}
 	}
 	

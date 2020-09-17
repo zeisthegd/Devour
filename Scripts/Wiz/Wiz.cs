@@ -22,11 +22,11 @@ public class Wiz : KinematicBody2D
 
 	public override void _Ready()
 	{
-		formManager = new FormManager();
+		formManager = new FormManager(this);
 		absorbedmobIconDisplayer = (TransformMobIcon)GetNode("absorbedmobIconDisplayer");
 		attackDuration = (Timer)GetNode("attackDuration");
 		stateMachine = new StateMachine(this);
-		formManager.CreateNormalWizForm(this);
+		formManager.CreateNormalWizForm();
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -37,7 +37,6 @@ public class Wiz : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
-		GD.Print(formManager.NextFormEnum.ToString());
 		ManageStateMachine();
 	}
 
@@ -66,7 +65,6 @@ public class Wiz : KinematicBody2D
 	{
 		get { return hook; }
 		set { hook = value; }
-
 	}
 	public bool CanUseHook
 	{

@@ -101,11 +101,7 @@ namespace WizHook
 		
 
 		#region Properties
-		//public bool IsHooking
-		//{
-		//    get { return isHooking; }
-		//    set { isHooking = value; }
-		//}
+
 		public Vector2 Velocity
 		{
 			get { return velocity; }

@@ -10,5 +10,10 @@ one_shot = true
 
 [node name="attackCooldownTime" type="Timer" parent="."]
 one_shot = true
+
+[node name="windUpTime" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 [connection signal="timeout" from="attackLength" to="." method="_on_attackLength_timeout"]
 [connection signal="timeout" from="attackCooldownTime" to="." method="_on_attackCooldownTime_timeout"]
+[connection signal="timeout" from="windUpTime" to="." method="_on_windUpTime_timeout"]

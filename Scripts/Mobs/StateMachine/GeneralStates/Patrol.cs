@@ -6,51 +6,40 @@ using System.Threading.Tasks;
 using AISystem;
 using Godot;
 
-namespace GeneralStates
+namespace MobStateMachine
 {
-	class Patrol : MobStateMachine.IMobState
+	class Patrol : MobState
 	{
-		MobStateMachine.StateMachine stateMachine;
-
-		public Patrol(MobStateMachine.StateMachine newStateMachine)
+		public Patrol(StateMachine newStateMachine): base(newStateMachine)
 		{
-			stateMachine = newStateMachine;
-
 		}
-		public void AutoPilot(Mob mob)
+		public override void AutoPilot()
 		{
-			SeeWiz(mob);
-			WizOutOfSight(mob);
-			RunOutOfHealth(mob);
-			PlayAnimation(mob);
-
-			stateMachine.ChangeToHooked();
+			base.AutoPilot();
 		}
 
-		public void PlayAnimation(Mob mob)
+		public override void PlayAnimation()
 		{
 			if(mob.Velocity != Vector2.Zero)
 				stateMachine.AnimationControl.ChangeAnimation(mob.AnimationPlayer,"patrol");
 			else stateMachine.AnimationControl.ChangeAnimation(mob.AnimationPlayer, "idle");
 		}
 
-		public void RunOutOfHealth(Mob mob)
+		public override void RunOutOfHealth()
 		{
 			//if mob health <=0 change to die
 			//die
-
 		}
 
-		public void SeeWiz(Mob mob)
+		public override void SeeWiz()
 		{
-			if (mob.WizInAttack)
-				stateMachine.ChangeToAttack();
+			if (mob.WizEnteredAttackZone)
+				ChangeToAttack();
 		}
 
-		public void WizOutOfSight(Mob mob)
-		{
-			if (!mob.WizInAttack)						
-				mob.PatrolSystem.DoPatrol(mob);
+		public override void WizOutOfSight()
+		{					
+			mob.PatrolSystem.DoPatrol(mob);
 		}
 
 	}

@@ -3,3 +3,9 @@ C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Debug\Devour.dll
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\bin\Debug\Devour.pdb
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Debug\Devour.dll
 C:\Users\Nguyen\Documents\Godot\Devour\.mono\temp\obj\Debug\Devour.pdb
+D:\Godot\Projects\Devour\.mono\temp\obj\Debug\Devour.csprojAssemblyReference.cache
+D:\Godot\Projects\Devour\.mono\temp\obj\Debug\Devour.csproj.CoreCompileInputs.cache
+D:\Godot\Projects\Devour\.mono\temp\bin\Debug\Devour.dll
+D:\Godot\Projects\Devour\.mono\temp\bin\Debug\Devour.pdb
+D:\Godot\Projects\Devour\.mono\temp\obj\Debug\Devour.dll
+D:\Godot\Projects\Devour\.mono\temp\obj\Debug\Devour.pdb

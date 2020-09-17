@@ -9,13 +9,8 @@ namespace Animation
 {
     public class AnimationControl
     {
-        private string animationDirection;
+        private string animationDirection = "Down";
 
-        public AnimationControl()
-
-            {
-            animationDirection = "Down";
-            }
         public string AnimationDirection
         {
             get { return animationDirection; }
@@ -33,18 +28,18 @@ namespace Animation
                 animationDirection = "Right";
         }
         public void ChangeMobAnimationDirection(Mob mob)
-        {          
-            if(mob.Velocity.y > 0 && Mathf.Abs(mob.Velocity.y) > Mathf.Abs(mob.Velocity.x))
+        {
+            if (mob.Velocity.y > 0 && Mathf.Abs(mob.Velocity.y) > Mathf.Abs(mob.Velocity.x))
                 animationDirection = "Down";
-            else if(mob.Velocity.y < 0 && Mathf.Abs(mob.Velocity.y) > Mathf.Abs(mob.Velocity.x))
+            else if (mob.Velocity.y < 0 && Mathf.Abs(mob.Velocity.y) > Mathf.Abs(mob.Velocity.x))
                 animationDirection = "Up";
-            if(mob.Velocity.x < 0 && Mathf.Abs(mob.Velocity.x) > Mathf.Abs(mob.Velocity.y))
+            if (mob.Velocity.x < 0 && Mathf.Abs(mob.Velocity.x) > Mathf.Abs(mob.Velocity.y))
                 animationDirection = "Left";
             else if (mob.Velocity.x > 0 && Mathf.Abs(mob.Velocity.x) > Mathf.Abs(mob.Velocity.y))
                 animationDirection = "Right";
         }
 
-        public void ChangeAnimation(AnimationPlayer objectAnimationPlayer,string animationType)
+        public void ChangeAnimation(AnimationPlayer objectAnimationPlayer, string animationType)
         {
             objectAnimationPlayer.Play(animationType + animationDirection);
         }

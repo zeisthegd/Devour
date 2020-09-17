@@ -4,40 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeneralStates
+namespace MobStateMachine
 {
-    class Chase : MobStateMachine.IMobState
+    class Chase : MobState
     {
-        MobStateMachine.StateMachine stateMachine;
-
-        public Chase(MobStateMachine.StateMachine newStateMachine)
+        public Chase(StateMachine newStateMachine):base(newStateMachine)
         {
-            stateMachine = newStateMachine;
-
         }
 
-        public void AutoPilot(Mob mob)
+        public override void AutoPilot()
         {
-            throw new NotImplementedException();
+            base.AutoPilot();
         }
 
-        public void PlayAnimation(Mob mob)
+        public override void PlayAnimation()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void RunOutOfHealth(Mob mob)
+        public override void RunOutOfHealth()
         {
             //die
         }
 
-        public void SeeWiz(Mob mob)
+        public override void SeeWiz()
         {
             //if(wiz is in attack range)
             //change to attack
         }
 
-        public void WizOutOfSight(Mob mob)
+        public override void WizOutOfSight()
         {
             //change to patrol
         }

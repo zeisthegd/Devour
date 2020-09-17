@@ -7,39 +7,29 @@ using System.Threading.Tasks;
 
 namespace WizStateMachine
 {
-    class Run : IWizState
+    class Run : WizState
     {
-        StateMachine stateMachine;
         Vector2 tempVec;
-
-        int runSpeed;
-
-        public Run(StateMachine newStateMachine)
+        int runSpeed = 100;
+        public Run(StateMachine newStateMachine) : base(newStateMachine)
         {
-            stateMachine = newStateMachine;
-            runSpeed = stateMachine.GetRunSpeed();
         }
-        public void HandleInput(Wiz wiz)
+        public override void HandleInput()
         {
             wiz.Velocity = new Vector2();
 
-            PressUp(wiz);
-            PressDown(wiz);
-            PressRight(wiz);
-            PressLeft(wiz);
-
-            PlayAnimation(wiz);
-
-            PressAttack(wiz);
-
-            SetWizVelocity(wiz);
-
-            ChangeToIdle(wiz);
-
+            PressUp();
+            PressDown();
+            PressRight();
+            PressLeft();
+            PlayAnimation();
+            PressAttack();
+            SetWizVelocity();
+            VelocityEqualsZero();
 
         }
 
-        public void PressAttack(Wiz wiz)
+        public override void PressAttack()
         {
             if (Input.IsActionJustPressed("attack"))
             {
@@ -48,61 +38,61 @@ namespace WizStateMachine
             }
         }
 
-        public void PressSpecial(Wiz wiz)
+        public override void PressSpecial()
         {
 
         }
 
         #region Run Algorhithm
-        public void PressDown(Wiz wiz)
+        public override void PressDown()
         {
             if (Input.IsActionPressed("ui_down"))
-                RunDown(wiz);
+                RunDown();
         }
 
-        public void PressLeft(Wiz wiz)
+        public override void PressLeft()
         {
             if (Input.IsActionPressed("ui_left"))
-                RunLeft(wiz);
+                RunLeft();
         }
 
-        public void PressRight(Wiz wiz)
+        public override void PressRight()
         {
             if (Input.IsActionPressed("ui_right"))
-                RunRight(wiz);
+                RunRight();
         }
 
-        public void PressUp(Wiz wiz)
+        public override void PressUp()
         {
             if (Input.IsActionPressed("ui_up"))
-                RunUp(wiz);
+                RunUp();
         }
 
-        private void SetWizVelocity(Wiz wiz)
+        private void SetWizVelocity()
         {
             if (!stateMachine.IsAttacking)
-                wiz.Velocity = wiz.Velocity.Normalized() * stateMachine.GetRunSpeed();
+                wiz.Velocity = wiz.Velocity.Normalized() * runSpeed;
         }
 
-        private void RunLeft(Wiz wiz)
+        private void RunLeft()
         {
             tempVec = wiz.Velocity;
             tempVec.x -= 1;
             wiz.Velocity = tempVec;
         }
-        private void RunRight(Wiz wiz)
+        private void RunRight()
         {
             tempVec = wiz.Velocity;
             tempVec.x += 1;
             wiz.Velocity = tempVec;
         }
-        private void RunUp(Wiz wiz)
+        private void RunUp()
         {
             tempVec = wiz.Velocity;
             tempVec.y -= 1;
             wiz.Velocity = tempVec;
         }
-        private void RunDown(Wiz wiz)
+        private void RunDown()
         {
             tempVec = wiz.Velocity;
             tempVec.y += 1;
@@ -110,31 +100,28 @@ namespace WizStateMachine
         }
         #endregion
 
-        public void PlayAnimation(Wiz wiz)
+        public override void PlayAnimation()
         {
             stateMachine.AnimationControl.ChangeAnimation(wiz.AnimationPlayer, "run");
         }
 
-        private void ChangeToIdle(Wiz wiz)
+        private void VelocityEqualsZero()
         {
             if (wiz.Velocity == Vector2.Zero)
-                stateMachine.SetWizState(stateMachine.GetIdleState());
+                ChangeToIdle();
         }
 
-        private void ChangeToAttack(Wiz wiz)
+        private void AttackPressed()
         {
             runSpeed = 0;
             wiz.AttackTimer.Start();
-            stateMachine.SetWizState(stateMachine.GetAttackState());
+            ChangeToAttack();
         }
 
-        private void ChangeToHooking(Wiz wiz)
+        private void HookPressed()
         {
             stateMachine.IsHooking = true;
-            stateMachine.SetWizState(stateMachine.GetHookingState());
+            ChangeToHook();
         }
-
-
-
     }
 }

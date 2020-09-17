@@ -9,81 +9,60 @@ namespace MobStateMachine
 {
 	public class StateMachine
 	{
-		#region States
-		IMobState patrol;
-		IMobState attack;
-		IMobState chase;
-		IMobState die;
-		IMobState hooked;
+		MobState patrol;
+		MobState attack;
+		MobState chase;
+		MobState die;
+		MobState hooked;
 
-		IMobState mobState;
-		#endregion
+		MobState mobState;
 
-		#region Mob
-		public Mob mob;
-
-		#endregion
+		Mob mob;
 
 		Animation.AnimationControl animationControl = new Animation.AnimationControl();
-		bool isAttacking = false;
-		bool isHookingMob = false;
+		bool isBeingHooked = false;
 		int runSpeed = 100;
 		float distanceToAttack = 100;
 
-		public Animation.AnimationControl AnimationControl
-		{
-			get { return animationControl; }
-		}
+		
 
 		public StateMachine(Mob newMob)
 		{
-			patrol = new GeneralStates.Patrol(this);
-			attack = new GeneralStates.Attack(this);
-			chase = new GeneralStates.Chase(this);
-			hooked = new GeneralStates.Hooked(this);
-
 			this.mob = newMob;
 
+			patrol = new Patrol(this);
+			attack = new Attack(this);
+			chase = new Chase(this);
+			hooked = new Hooked(this);
 			mobState = patrol;
 		}
 
 		public void Action()
 		{
 			animationControl.ChangeMobAnimationDirection(this.mob);
-			mobState.AutoPilot(this.mob);
+			mobState.AutoPilot();
 		}
 
-		public void SetMobState(IMobState newMobState)
+		public void SetMobState(MobState newMobState)
 		{
 			this.mobState = newMobState;
 		}
 
-		public void ChangeToPatrol() { this.mobState = GetPatrolState(); }
-		public void ChangeToChase() { this.mobState = GetChaseState(); }
-		public void ChangeToAttack()
+		public MobState HookedState {get => hooked; }
+		public MobState PatrolState { get => patrol; }
+		public MobState ChaseState { get => chase; }
+		public MobState AttackState { get => attack; }
+
+		public bool IsBeingHooked
 		{
-			this.mobState = GetAttackState();
-		}
-		public void ChangeToHooked()
-		{
-			if (isHookingMob)
-				this.mobState = GetHookedState();
+			get { return isBeingHooked; }
+			set { isBeingHooked = value; }
 		}
 
-		public IMobState GetHookedState() { return hooked; }
-		public IMobState GetPatrolState() { return patrol; }
-		public IMobState GetChaseState() { return chase; }
-		public IMobState GetAttackState() { return attack; }
-
-		public bool IsAttacking
+        public Mob Mob { get => mob;}
+		public Animation.AnimationControl AnimationControl
 		{
-			get { return isAttacking; }
-			set { isAttacking = value; }
-		}
-		public bool IsHookingMob
-		{
-			get { return isHookingMob; }
-			set { isHookingMob = value; }
+			get { return animationControl; }
 		}
 	}
 }

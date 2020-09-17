@@ -14,6 +14,7 @@ namespace Devour
             NormalWiz,
             Kwissi
         }
+        Wiz wiz;
 
         FormManager firstInstance;
 
@@ -23,10 +24,9 @@ namespace Devour
         Form currentForm;
         Form nextForm;
 
-
-
-        public FormManager()
+        public FormManager(Wiz wiz)
         {
+            this.wiz = wiz;
             currentForm = Form.NormalWiz;
             nextForm = Form.NormalWiz;
         }
@@ -34,7 +34,7 @@ namespace Devour
         public void ChangeWizForm(Wiz wiz)
         {
             ChangeFormAlgorithm(wiz);
-            ChangeWizFieldsBasedOnForm(wiz);
+            ChangeWizFieldsBasedOnForm();
         }
 
         public void ChangeFormAlgorithm(Wiz wiz)
@@ -62,7 +62,7 @@ namespace Devour
             }
         }
 
-        public void CreateNormalWizForm(Wiz wiz)
+        public void CreateNormalWizForm()
         {
             formAlgorithm = new NormalWiz(wiz);
             ChangeFormScene("NormalWiz");
@@ -71,19 +71,18 @@ namespace Devour
             wiz.AnimationPlayer = newForm.AnimationPlayer;
         }
 
-        public void ChangeWizFieldsBasedOnForm(Wiz wiz)
+        public void ChangeWizFieldsBasedOnForm()
         {
             if(currentForm != nextForm)
             {
                 WizForms newForm = (WizForms)wizForm.Instance();
                 wiz.AddChild(newForm);
                 wiz.AnimationPlayer = newForm.AnimationPlayer;
-                RemoveForm(wiz);
-            }
-            
+                RemoveForm();
+            }           
         }
 
-        public void RemoveForm(Wiz wiz)
+        public void RemoveForm()
         {
             wiz.GetNode(currentForm.ToString()).QueueFree();
         }

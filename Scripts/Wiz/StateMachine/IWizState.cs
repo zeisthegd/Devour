@@ -9,14 +9,14 @@ namespace WizStateMachine
 {
     public interface IWizState
     {
-        void HandleInput(Wiz wiz);
+        void HandleInput();
 
-        void PlayAnimation(Wiz wiz);
-        void PressUp(Wiz wiz);
-        void PressDown(Wiz wiz);
-        void PressLeft(Wiz wiz);
-        void PressRight(Wiz wiz);
-        void PressAttack(Wiz wiz);
-        void PressSpecial(Wiz wiz);
+        void PlayAnimation();
+        void PressUp();
+        void PressDown();
+        void PressLeft();
+        void PressRight();
+        void PressAttack();
+        void PressSpecial();
     }
 }

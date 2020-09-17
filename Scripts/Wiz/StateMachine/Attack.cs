@@ -7,60 +7,51 @@ using System.Threading.Tasks;
 
 namespace WizStateMachine
 {
-	class Attack : IWizState
+	class Attack : WizState
 	{
-		StateMachine stateMachine;
-
-		public Attack(StateMachine newStateMachine)
+		public Attack(StateMachine newStateMachine):base(newStateMachine)
 		{                    
-			stateMachine = newStateMachine;
 		}
-		public void HandleInput(Wiz wiz)
+		public override void HandleInput()
 		{
-			//GD.Print("attack");
-			PlayAnimation(wiz);
-			ChangeToIdle();
+			PlayAnimation();
+			NotAttacking();
 		}
-		
-
-		public void PressUp(Wiz wiz)
+		public override void PressUp()
 		{
 			
 		}
 
-		public void PressDown(Wiz wiz)
+		public override void PressDown()
 		{
 			
 		}
 
-		public void PressLeft(Wiz wiz)
+		public override void PressLeft()
 		{
 		   
 		}
 
-		public void PressRight(Wiz wiz)
+		public override void PressRight()
 		{
 			
 		}
 
-		public void PressAttack(Wiz wiz)
+		public override void PressAttack()
 		{
 			wiz.FormAlgorithm.DoAttack();
-
-			//stateMachine.SetWizState(stateMachine.GetAttackState());
 		}
-		public void PressSpecial(Wiz wiz)
+		public override void PressSpecial()
 		{
-
+			wiz.FormAlgorithm.UseSpecial();
 		}
-		public void PlayAnimation(Wiz wiz)
+		public override void PlayAnimation()
 		{
-			wiz.AnimationPlayer.Play("attackDown");//change later
 		}
-		private void ChangeToIdle()
+		private void NotAttacking()
 		{
-			if(stateMachine.IsAttacking == false)
-				stateMachine.SetWizState(stateMachine.GetIdleState());
+			if (stateMachine.IsAttacking == false)
+				ChangeToIdle();
 
 		}
 	}

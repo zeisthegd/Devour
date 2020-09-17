@@ -5,43 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeneralStates
+namespace MobStateMachine
 {
-    class Hooked : MobStateMachine.IMobState
+    class Hooked : MobState
     {
-        MobStateMachine.StateMachine stateMachine;
-
-        public Hooked(MobStateMachine.StateMachine newStateMachine)
+        public Hooked(StateMachine newStateMachine):base(newStateMachine)
         {
-            stateMachine = newStateMachine;
-
         }
-        public void AutoPilot(Mob mob)
+        public override void AutoPilot()
         {
-            if(stateMachine.IsHookingMob)
-            {
-                mob.HookToWiz();
-            }
+            mob.HookToWiz();
         }
-
-        public void PlayAnimation(Mob mob)
+        public override void PlayAnimation()
         {
-            throw new NotImplementedException();
-        }
-
-        public void RunOutOfHealth(Mob mob)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SeeWiz(Mob mob)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WizOutOfSight(Mob mob)
-        {
-            throw new NotImplementedException();
+           
         }
     }
 }

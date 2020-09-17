@@ -23,16 +23,12 @@ public class Mob : Area2D
 	protected byte moveSpeed = 5;
 	protected byte hookedSpeed = 3;
 
-
-	#region Patrol System
 	protected PatrolSystem patrolSystem;
 
 
-	#endregion
-
 	protected bool isAttacking;
 
-	protected bool wizInAttack = false;
+	protected bool wizEnteredAttackZone = false;
 	protected bool canAttack = true;
 
 	protected Wiz wiz;
@@ -48,11 +44,7 @@ public class Mob : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-		//GD.Print($"wizinattack: {wizInAttack}");
-		//GD.Print($"Is attacking: {stateMachine.IsAttacking}");
-		//GD.Print($"canAttack: {canAttack}");
-		//GD.Print("globalX= " + GlobalPosition.x);
-		//patrolSystem.DoPatrol(this);
+
 		if (patrolSystem == null)
 			GD.Print("NULL");
 		stateMachine.Action();
@@ -80,13 +72,11 @@ public class Mob : Area2D
 		wiz.FormManager.ChangeNextForm(FormManager.Form.Kwissi);
 	}
 
-	#region Area and Body Signals
-
 	private void _on_Mob_area_entered(Area2D area)
 	{
 		if (GroupCheck.IsInTheHook(area))
 		{
-			stateMachine.IsHookingMob = true;
+			stateMachine.IsBeingHooked = true;
 		}
 	}
 	private void _on_Mob_body_entered(KinematicBody2D body)
@@ -94,19 +84,20 @@ public class Mob : Area2D
 		if (GroupCheck.IsInWiz(body))
 		{
 
-			if (!stateMachine.IsHookingMob)
+			if (!stateMachine.IsBeingHooked)
 				GD.Print("wiz hp -= 1 ");
 			else
 			{
 				ChangeWizCurrentlyAbsorbedMobIcon();
 				ChangeFormManagerNextForm();
 				QueueFree();
-			}//maybe do some thing else instead of queuefree
+			}
+			//TODO something else instead of queuefree
 		}
 	}
 	private void ChangeWizCurrentlyAbsorbedMobIcon()
 	{
-		if (stateMachine.IsHookingMob)
+		if (stateMachine.IsBeingHooked)
 			wiz.AbsorbedMobIconDisplayer.SetMobName(mobName);
 	}
 	public virtual void ChangeFormManagerNextForm()
@@ -118,7 +109,7 @@ public class Mob : Area2D
 	{
 		if (GroupCheck.IsInWiz(body))
 		{
-			wizInAttack = true;
+			wizEnteredAttackZone = true;
 		}
 	}
 
@@ -126,14 +117,11 @@ public class Mob : Area2D
 	{
 		if (GroupCheck.IsInWiz(body))
 		{
-			wizInAttack = false;
+			wizEnteredAttackZone = false;
 		}
 	}
 
 
-	#endregion
-
-	#region Properties
 	public Vector2 Velocity
 	{
 		get { return velocity; }
@@ -164,14 +152,11 @@ public class Mob : Area2D
 	{
 		get { return canAttack; }
 	}
-	public bool WizInAttack
+	public bool WizEnteredAttackZone
 	{
-		get { return wizInAttack; }
+		get { return wizEnteredAttackZone; }
 	}
 
-
-
-	#endregion
 }
 
 

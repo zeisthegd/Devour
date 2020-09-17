@@ -13,8 +13,8 @@ public class Camera : Camera2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-		this.GlobalPosition = RoundDownPosition(wiz.GlobalPosition);
-		GD.Print(this.GlobalPosition);
+		this.GlobalPosition = wiz.GlobalPosition;
+
 	}
 
 	Vector2 RoundDownPosition(Vector2 vectorToRound)

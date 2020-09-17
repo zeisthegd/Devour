@@ -7,34 +7,24 @@ using Godot;
 
 namespace WizStateMachine
 {
-	class Idle : IWizState
+	class Idle :WizState
 	{
-		StateMachine stateMachine;
-
-		public Idle(StateMachine newStateMachine)
+		public Idle(StateMachine newStateMachine) : base(newStateMachine)
 		{
-			stateMachine = newStateMachine;
 		}
-		public void HandleInput(Wiz wiz)
+		public override void HandleInput()
 		{
-			//GD.Print("idle");
 			wiz.Velocity = new Vector2();
-
-			PressDown(wiz);
-			PressLeft(wiz);
-			PressRight(wiz);
-			PressUp(wiz);
-
-			
-
-			PlayAnimation(wiz);
-
-			PressAttack(wiz);
-			PressSpecial(wiz);
-
+			PressDown();
+			PressLeft();
+			PressRight();
+			PressUp();
+			PressAttack();
+            PressSpecial();
+			PlayAnimation();
 		}
 
-		public void PressAttack(Wiz wiz)
+		public override void PressAttack()
 		{
 			if (Input.IsActionJustPressed("attack") )
 			{
@@ -45,58 +35,42 @@ namespace WizStateMachine
 				//	ChangeToAttack(wiz);
 			}
 		}
-		public void PressSpecial(Wiz wiz)
+		public override void PressSpecial()
 		{
 			if (Input.IsActionJustPressed("special"))
 				wiz.FormAlgorithm.UseSpecial();
 		}
 
-		public void PressDown(Wiz wiz)
+		public override void PressDown()
 		{
 			if (Input.IsActionPressed("ui_down"))
 				ChangeToRun();
-
 		}
 
-		public void PressLeft(Wiz wiz)
+		public override void PressLeft()
 		{
 			if (Input.IsActionPressed("ui_left"))
 				ChangeToRun();
 
 		}
 
-		public void PressRight(Wiz wiz)
+		public override void PressRight()
 		{
 			if (Input.IsActionPressed("ui_right"))
 				ChangeToRun();
 
 		}
 
-		public void PressUp(Wiz wiz)
+		public override void PressUp()
 		{
 			if (Input.IsActionPressed("ui_up"))
 				ChangeToRun();
 
 		}
 
-		public void PlayAnimation(Wiz wiz)
+		public override void PlayAnimation()
 		{
 			stateMachine.AnimationControl.ChangeAnimation(wiz.AnimationPlayer, "idle");
-		}
-
-		void ChangeToRun()
-		{
-			stateMachine.ChangeToRun();
-		}
-		private void ChangeToAttack(Wiz wiz)
-		{
-			wiz.AttackTimer.Start();
-			stateMachine.ChangeToAttack();
-		}
-		private void ChangeToHooking(Wiz wiz)
-		{
-			stateMachine.IsHooking = true;
-			stateMachine.ChangeToHook();
 		}
 	}
 }

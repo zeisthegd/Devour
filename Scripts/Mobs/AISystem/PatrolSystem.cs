@@ -10,19 +10,13 @@ namespace AISystem
 {
 	public class PatrolSystem : Node
 	{
-		Position2D leftBoundary;
-		Position2D rightBoundary;
-		Position2D upperBoundary;
-		Position2D lowerBoundary;
-
 		Timer idleDuration;
 		bool idleTimerStarted = false;
 		[Export]
-		byte maxIdleTime = 2;
+		float maxIdleTime = 1.5F;
 
 		Random rand = new Random();
 		int random;
-		float leftBound, rightBound, upperBound, lowerBound;
 
 		int maxDistanceToMove = 2;
 		string direction;
@@ -34,42 +28,29 @@ namespace AISystem
 
 		string actionToDo;
 		Vector2 waypoint;
-		float leftDest, rightDest, upperDest, lowerDest;
-
-
 		public override void _Ready()
 		{
-			//leftBoundary = (Position2D)GetParent().GetParent().GetNode("leftBound");//get mob -> get scene -> get position
-			//rightBoundary = (Position2D)GetParent().GetParent().GetNode("rightBound");
-			//upperBoundary = (Position2D)GetParent().GetParent().GetNode("upperBound");
-			//lowerBoundary = (Position2D)GetParent().GetParent().GetNode("lowerBound");
-
 			idleDuration = (Timer)GetNode("idleDuration");
 			actionToDo = "Patrol";
-			base._Ready();
 		}
 
 		public void DoPatrol(Mob mob)
 		{
-
 			if (actionToDo == "Idle")
 				StayIdle(mob);
 			else if (actionToDo == "Patrol")
 				KeepPatrolling(mob);
-
-
 			mob.Velocity = mob.Velocity.Normalized();
 		}
 
 		private void KeepPatrolling(Mob mob)
 		{
-			mobGlobalPosX = Calculations.RoundOff((int)mob.GlobalPosition.x);
-			mobGlobalPosY = Calculations.RoundOff((int)mob.GlobalPosition.y);
+			mobGlobalPosX = Mathf.FloorToInt(mob.GlobalPosition.x);
+			mobGlobalPosY = Mathf.FloorToInt(mob.GlobalPosition.y);
 			mobGlobalPos = new Vector2(mobGlobalPosX, mobGlobalPosY);
 
 			if (mob.Velocity == Vector2.Zero)
 				SetWayPoint(mob);
-
 
 			if (mobGlobalPos == waypoint)
 			{
@@ -144,51 +125,30 @@ namespace AISystem
 		private Vector2 SetDestinationLeft(Mob mob)
 		{
 			Vector2 dest;
-			dest = new Vector2(Calculations.RoundOff((int)mob.GlobalPosition.x - mob.SpriteSize * RandomPatrolDistance()),
-				Calculations.RoundOff((int)(mob.GlobalPosition.y)));
-			//if (dest.x < leftBoundary.GlobalPosition.x)
-			//	return SetDestinationLeft(mob);
-			//else
+			dest = new Vector2(Mathf.FloorToInt(mob.GlobalPosition.x - mob.SpriteSize * RandomPatrolDistance()),
+				Mathf.FloorToInt(mob.GlobalPosition.y));
 				return dest;
 		}
 		private Vector2 SetDestinationRight(Mob mob)
 		{
 			Vector2 dest;
-			dest = new Vector2(Calculations.RoundOff((int)mob.GlobalPosition.x + mob.SpriteSize * RandomPatrolDistance()),
-				Calculations.RoundOff((int)(mob.GlobalPosition.y)));
-			rightDest = dest.x;
-			//if (dest.x > rightBoundary.GlobalPosition.x)
-			//	return SetDestinationRight(mob);
-			//else
+			dest = new Vector2(Mathf.FloorToInt(mob.GlobalPosition.x + mob.SpriteSize * RandomPatrolDistance()),
+				Mathf.FloorToInt(mob.GlobalPosition.y));
 				return dest;
 		}
 		private Vector2 SetDestinationUp(Mob mob)
 		{
 			Vector2 dest;
-			dest = new Vector2(Calculations.RoundOff((int)(mob.GlobalPosition.x)),
-				Calculations.RoundOff((int)mob.GlobalPosition.y - mob.SpriteSize * RandomPatrolDistance()));
-			//if (dest.y < rightBoundary.GlobalPosition.y)
-			//	return SetDestinationUp(mob);
-			//else
+			dest = new Vector2(Mathf.FloorToInt(mob.GlobalPosition.x),
+				Mathf.FloorToInt(mob.GlobalPosition.y - mob.SpriteSize * RandomPatrolDistance()));
 				return dest;
 		}
 		private Vector2 SetDestinationDown(Mob mob)
 		{
 			Vector2 dest;
-			dest = new Vector2(Calculations.RoundOff((int)(mob.GlobalPosition.x)),
-				Calculations.RoundOff((int)mob.GlobalPosition.y + mob.SpriteSize * RandomPatrolDistance()));
-			//if (dest.y > rightBoundary.GlobalPosition.y)
-			//	return SetDestinationDown(mob);
-			//else
+			dest = new Vector2(Mathf.FloorToInt(mob.GlobalPosition.x),
+				Mathf.FloorToInt(mob.GlobalPosition.y + mob.SpriteSize * RandomPatrolDistance()));
 				return dest;
-		}
-
-
-		public bool CheckLeftBoundary(Mob mob)
-		{
-			if (mob.GlobalPosition.x - mob.SpriteSize * RandomPatrolDistance() < leftBound)
-				return false;
-			else return true;
 		}
 
 		private void _on_idleDuration_timeout()

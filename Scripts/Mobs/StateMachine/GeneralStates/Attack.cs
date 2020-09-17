@@ -5,49 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Godot;
 
-namespace GeneralStates
+namespace MobStateMachine
 {
-	class Attack : MobStateMachine.IMobState
+	class Attack : MobState
 	{
-		MobStateMachine.StateMachine stateMachine;
-
-		public Attack(MobStateMachine.StateMachine newStateMachine)
-		{
-			stateMachine = newStateMachine;
-
+		public Attack(StateMachine newStateMachine):base(newStateMachine)
+		{		
 		}
 
-		public void AutoPilot(Mob mob)
+		public override void AutoPilot()
 		{
-
-			SeeWiz(mob);
-			WizOutOfSight(mob);
-			PlayAnimation(mob);
-
-			stateMachine.ChangeToHooked();
+			base.AutoPilot();
 		}
 
-		public void PlayAnimation(Mob mob)
+		public override void PlayAnimation()
 		{
 			stateMachine.AnimationControl.ChangeAnimation(mob.AnimationPlayer, "idle");
 		}
 
-		public void RunOutOfHealth(Mob mob)
+		public override void RunOutOfHealth()
 		{
 			//change state
 			//die
 		}
 
-		public void SeeWiz(Mob mob)
+		public override void SeeWiz()
 		{
-			mob.AttackStrategy.Attack();
 		}
 
-		public void WizOutOfSight(Mob mob)
+		public override void WizOutOfSight()
 		{
-			//change to patrol
-			if (!mob.WizInAttack)
-				stateMachine.ChangeToPatrol();
+			if (!mob.WizEnteredAttackZone)
+				ChangeToPatrol();
 		}
-	}
+    }
 }
