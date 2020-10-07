@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Spawners/MapSpawner/MapSpawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Map/Map1/Room/RoomTiles/Map1Room.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Wiz/Wiz.tscn" type="PackedScene" id=3]
+
+[node name="Map1Spawner" instance=ExtResource( 1 )]
+process_priority = 1
+
+[node name="OuterWall" parent="." index="0"]
+visible = false
+tile_set = ExtResource( 2 )
+
+[node name="Wiz" parent="." index="1" instance=ExtResource( 3 )]
+position = Vector2( 65.4074, 52.2254 )

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Devour"
-run/main_scene="res://Scenes/Testing/testStage.tscn"
+run/main_scene="res://Scenes/Testing/FirstRandomMap.tscn"
 boot_splash/image="res://Art/Icon/bootplash.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false

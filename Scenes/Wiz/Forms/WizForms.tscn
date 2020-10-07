@@ -1,6 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/Wiz/Transform/WizForms.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Wiz/Forms/WizForms.cs" type="Script" id=1]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "attackDown"

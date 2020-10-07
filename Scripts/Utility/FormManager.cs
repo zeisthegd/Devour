@@ -88,7 +88,7 @@ namespace Devour
         }
         private void ChangeFormScene(string sceneName)
         {
-            wizForm = (PackedScene)GD.Load($"res://Scenes/Wiz/Forms/{sceneName}.tscn");
+            wizForm = (PackedScene)GD.Load($"res://Scenes/Wiz/Forms/{sceneName}/{sceneName}.tscn");
         }
 
 
@@ -118,6 +118,4 @@ namespace Devour
             currentForm = newCurrentForm;
         }
     }
-
-
 }
